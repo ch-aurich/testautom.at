@@ -9,11 +9,6 @@ Vitrek::Vitrek(QWidget *parent)
 
     serial->setPortName("/dev/ttyUSB0");
 
-    serial->setBaudRate(115200);
-    serial->setDataBits(QSerialPort::Data8);
-    serial->setParity(QSerialPort::NoParity);
-    serial->setStopBits(QSerialPort::OneStop);
-    serial->setFlowControl(QSerialPort::NoFlowControl);
 
     if (serial->open(QIODevice::ReadWrite)) {
         printf("ok\n");
@@ -22,8 +17,19 @@ Vitrek::Vitrek(QWidget *parent)
       //TODO: error handling!
     }
 
+    serial->setBaudRate(115200);
+    serial->setDataBits(QSerialPort::Data8);
+    serial->setParity(QSerialPort::NoParity);
+    serial->setStopBits(QSerialPort::OneStop);
+    serial->setFlowControl(QSerialPort::NoFlowControl);
+
+
     printf("name\n");
     serial->write("NAME,test\n");
+
+    if (!serial->waitForBytesWritten(1000)) {
+        /* timeout handling */
+       }
 
     printf("close\n");
     serial->close();
