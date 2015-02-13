@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //    QMessageBox::critical(0,"count columns", QString("%1").arg(query.record().count()));
 //    QMessageBox::critical(0,"count columns", QString("%1").arg(query.size()));
-    Vitrek *v = new Vitrek(this);
+    Vitrek *v = new Vitrek("/dev/ttyUSB0");
     v->sequence_set_name("test");
 
 

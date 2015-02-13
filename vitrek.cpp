@@ -3,11 +3,11 @@
 #include <stdio.h>
 
 
-Vitrek::Vitrek(QWidget *parent)
+Vitrek::Vitrek(const QString portname)
 {
     serial = new QSerialPort();
 
-    serial->setPortName("/dev/ttyUSB0");
+    serial->setPortName(portname);
 
 
     if (serial->open(QIODevice::ReadWrite)) {
@@ -30,19 +30,19 @@ Vitrek::Vitrek(QWidget *parent)
     if (!serial->waitForBytesWritten(1000)) {
         /* timeout handling */
        }
+}
 
-    printf("close\n");
+Vitrek::~Vitrek(){
     serial->close();
 }
 
 void Vitrek::sequence_clear()
 {
     serial->write("NOSEQ");
+
 }
 
 void Vitrek::sequence_set_name(QString name)
 {
-//    printf("name");
-//    serial->write("NAME,test\n");
-//    serial->close();
+    serial->write("NAME,test\n");
 }

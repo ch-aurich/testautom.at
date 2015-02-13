@@ -8,7 +8,9 @@
 class Vitrek
 {
 public:
-    Vitrek(QWidget *parent=0);
+    Vitrek(const QString portname);
+    ~Vitrek();
+
 
     //modify sequences
     void sequence_clear();
